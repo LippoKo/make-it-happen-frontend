@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'make-it-happen';
+export class AppComponent implements OnInit {
+  public title: string = '';
+
+  constructor(private httpClient: HttpClient) {}
+
+  public ngOnInit(): void {
+    this.httpClient
+      .get<{ title: string }>('/api/hello', { responseType: 'json' })
+      .subscribe((response) => (this.title = response.title));
+  }
 }
