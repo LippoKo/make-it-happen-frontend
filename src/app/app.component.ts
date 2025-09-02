@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.httpClient
-      .get<{ title: string }>('/api/hello', { responseType: 'json' })
-      .subscribe((response) => (this.title = response.title));
+      .get('/api/hello', { responseType: 'text' })
+      .subscribe((response: string) => (this.title = response));
   }
 }

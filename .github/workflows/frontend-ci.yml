@@ -1,7 +1,11 @@
 name: Frontend CI
 
+run-name: Build ${{ github.ref_name }} by @${{ github.actor }}
+
 on:
   push:
+    tags-ignore:
+      - "**"
     branches:
       - "feature/**"
       - "bugfix/**"
